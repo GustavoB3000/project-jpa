@@ -1,0 +1,28 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+        version="2.2">
+
+<!--     <persistence-unit name="kcPersistenceUnit" transaction-type="RESOURCE_LOCAL"> -->
+    <persistence-unit name="persistenceGustavo">
+<!--         <description> -->
+<!--             Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide -->
+<!--         </description> -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tienda_musical" />
+            <property name="jakarta.persistence.jdbc.user" value="root" />
+            <property name="jakarta.persistence.jdbc.password" value="gtHDPal1" />
+<!--             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> -->
+<!--             <property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/> -->
+<!--             <property name="javax.persistence.schema-generation.scripts.create-target" value="sampleCreate.ddl"/> -->
+<!--             <property name="javax.persistence.schema-generation.scripts.drop-target" value="sampleDrop.ddl"/> -->
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+            <property name="hibernate.show_sql" value="true" />
+<!--             <property name="hibernate.hbm2ddl.auto" value="create" /> -->
+        </properties>
+    </persistence-unit>
+</persistence>
