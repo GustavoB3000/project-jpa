@@ -26,7 +26,6 @@ public class DisqueraDAOImpl implements DisqueraDAO {
 
 	@Override
 	public void guardar(Disquera disquera) {
-		// TODO Auto-generated method stub
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
 
 		EntityTransaction et = em.getTransaction();
@@ -47,7 +46,6 @@ public class DisqueraDAOImpl implements DisqueraDAO {
 
 	@Override
 	public void actualizar(Disquera disquera) {
-		// TODO Auto-generated method stub
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
 
 		EntityTransaction et = em.getTransaction();
@@ -68,7 +66,6 @@ public class DisqueraDAOImpl implements DisqueraDAO {
 
 	@Override
 	public void eliminar(Long id) {
-		// TODO Auto-generated method stub
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
 
 		Disquera disqueraConsultada = em.find(Disquera.class, id);
@@ -87,30 +84,40 @@ public class DisqueraDAOImpl implements DisqueraDAO {
 		} finally {
 			em.close();
 		}
-
 	}
 
 	@Override
 	public List<Disquera> consultar() {
-		// TODO Auto-generated method stub
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-		
 		TypedQuery<Disquera> tq =  (TypedQuery<Disquera>) em.createQuery("FROM Disquera ORDER BY descripcion");
-		
 		return tq.getResultList();
 	}
 
 	@Override
 	public Disquera consultarById(Long id) {
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-
 		Disquera objetoABuscar = em.find(Disquera.class, id);
 
 		if (objetoABuscar == null) {
 			throw new EntityNotFoundException("La disquera con el id " + id + ", no fue encontrada.");
 		}
-
 		return objetoABuscar;
+	}
+
+	@Override
+	public Disquera consultarByDescripcionJPQL(String descripcion) {
+		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+		TypedQuery<Disquera> tq =  (TypedQuery<Disquera>) em.createQuery("FROM Disquera WHERE descripcion = :desc");
+		tq.setParameter("desc", descripcion);
+		return tq.getSingleResult();
+	}
+
+	@Override
+	public Disquera consultarByDescripcionNative(String descripcion) {
+		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+		TypedQuery<Disquera> tq =  (TypedQuery<Disquera>) em.createNativeQuery("SELECT * FROM Disquera WHERE descripcion = :desc", Disquera.class);
+		tq.setParameter("desc", descripcion);
+		return tq.getSingleResult();
 	}
 
 }
